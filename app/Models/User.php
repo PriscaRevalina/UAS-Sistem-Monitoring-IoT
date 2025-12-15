@@ -20,7 +20,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'password',
+        'api_token',
     ];
 
     /**
@@ -29,8 +29,7 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $hidden = [
-        'password',
-        'remember_token',
+        'api_token',
     ];
 
     /**
@@ -42,7 +41,11 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
-            'password' => 'hashed',
         ];
+    }
+
+    // relasi ke booking
+    public function bookings() {
+        return $this->hasMany(Booking::class);
     }
 }
